@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Keeps Museveni in Power? | Uganda Power Analysis</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="An investigative analysis of Uganda's power structure: 41 years of Museveni's rule, military control, corruption networks, and international backing. Discover the facts behind Africa's longest-serving leader.">
+  <meta name="keywords" content="Museveni, Uganda, Africa, dictatorship, corruption, military, international aid, Bobi Wine, NUP, human rights, democracy">
+  <meta name="author" content="The Dutch Brief">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://the-dutch-brief.netlify.app/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Who Keeps Museveni in Power? | Uganda Power Analysis">
+  <meta property="og:description" content="An investigative analysis of Uganda's power structure: 41 years of rule, military control, corruption, and international backing.">
+  <meta property="og:image" content="https://the-dutch-brief.netlify.app/gray.png">
+  <meta property="og:url" content="https://the-dutch-brief.netlify.app/">
+  <meta property="og:site_name" content="The Dutch Brief">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Who Keeps Museveni in Power?">
+  <meta name="twitter:description" content="41 years. One man. A complex web of military control, corruption, and international support.">
+  <meta name="twitter:image" content="https://the-dutch-brief.netlify.app/gray.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Playfair Display', 'serif'], sans: ['Inter', 'sans-serif'] },
+          colors: { 
+            uganda: { black: '#0a0a0a', dark: '#141414', card: '#1a1a1a', red: '#dc2626', gold: '#fbbf24' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0a0a0a; }
+    .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .glow-gold { box-shadow: 0 0 60px rgba(251, 191, 36, 0.15); }
+    .glow-red { box-shadow: 0 0 60px rgba(220, 38, 38, 0.15); }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(251,191,36,0.3), transparent); }
+    .timeline-line { background: linear-gradient(to bottom, #fbbf24, #dc2626); }
+    .nav-dot { transition: all 0.3s; }
+    .nav-dot.active { transform: scale(1.5); background: #fbbf24; }
+    html { scroll-behavior: smooth; }
+    .play-btn { transition: all 0.3s; }
+    .play-btn:hover { transform: scale(1.1); }
+    .play-btn.playing { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.4); } 50% { box-shadow: 0 0 0 15px rgba(251,191,36,0); } }
+    .section-indicator { transition: all 0.3s; }
+  </style>
+</head>
+<body class="font-sans text-gray-100">
+  
+  <!-- Progress Bar -->
+  <div id="progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-uganda-gold to-uganda-red z-50" style="width: 0%;"></div>
+
+  <!-- Auto-Play Controls -->
+  <div id="autoplay-controls" class="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-uganda-card border-2 border-uganda-gold/50 px-5 py-3 rounded-full shadow-2xl" style="box-shadow: 0 0 30px rgba(251,191,36,0.3);">
+    <button onclick="skipSection(-1)" class="w-9 h-9 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-white">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="play-btn" onclick="toggleAutoPlay()" class="play-btn w-14 h-14 bg-uganda-gold rounded-full flex items-center justify-center text-uganda-black hover:bg-white shadow-lg" style="box-shadow: 0 0 20px rgba(251,191,36,0.5);">
+      <svg id="play-icon" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pause-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+    <button onclick="skipSection(1)" class="w-9 h-9 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-white">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  
+  <!-- Section Label (top right) -->
+  <div id="section-display" class="fixed top-6 right-8 z-50 bg-uganda-card/90 backdrop-blur border border-gray-700 px-4 py-2 rounded-full">
+    <span id="section-label" class="text-white font-medium text-sm">Press ▶ to begin</span>
+  </div>
+  
+  <!-- Audio -->
+  <audio id="podcast-audio" src="Podcast.mp3" preload="auto"></audio>
+
+  <!-- Floating Navigation -->
+  <nav id="floating-nav" class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-3">
+    <button onclick="scrollTo('hero')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Top"></button>
+    <button onclick="scrollTo('stats')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Key Facts"></button>
+    <button onclick="scrollTo('timeline')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Timeline"></button>
+    <button onclick="scrollTo('military')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Military"></button>
+    <button onclick="scrollTo('corruption')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Corruption"></button>
+    <button onclick="scrollTo('international')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="International"></button>
+    <button onclick="scrollTo('opposition')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Opposition"></button>
+    <button onclick="scrollTo('conclusion')" class="nav-dot w-3 h-3 rounded-full bg-gray-600 hover:bg-uganda-gold" title="Conclusion"></button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-uganda-gold/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-uganda-red/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="absolute left-0 top-0 h-full w-1/2 opacity-20 pointer-events-none">
+      <img src="gray.png" alt="" class="h-full w-full object-cover object-right">
+    </div>
+    
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <p class="text-uganda-gold uppercase tracking-[0.3em] text-sm mb-6 fade-up">An Investigation</p>
+      <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 fade-up">
+        Who Keeps<br><span class="text-uganda-gold">Museveni</span> in Power?
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 fade-up">
+        41 years. One man. A complex web of military control, corruption, and international support.
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-8 mb-16 fade-up">
+        <div class="text-center">
+          <div class="text-5xl font-bold text-uganda-gold" data-target="41">0</div>
+          <div class="text-gray-500 text-sm uppercase tracking-wider mt-1">Years in Power</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-bold text-white">$20B+</div>
+          <div class="text-gray-500 text-sm uppercase tracking-wider mt-1">US Aid Received</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-bold text-uganda-red" data-target="20">0</div>
+          <div class="text-gray-500 text-sm uppercase tracking-wider mt-1">% Lost to Corruption</div>
+        </div>
+      </div>
+      
+      <a href="#stats" class="inline-flex items-center gap-2 text-uganda-gold hover:text-white transition-colors fade-up">
+        <span>Explore the Evidence</span>
+        <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- STATS -->
+  <section id="stats" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-20 right-10 w-72 h-72 bg-uganda-red/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 left-10 w-96 h-96 bg-uganda-gold/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="absolute inset-0 opacity-15 pointer-events-none">
+      <video autoplay muted loop playsinline class="h-full w-full object-cover object-left scale-x-[-1]">
+        <source src="2.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <p class="text-uganda-gold uppercase tracking-[0.3em] text-sm mb-6 fade-up">The Evidence</p>
+      <h2 class="font-serif text-5xl md:text-7xl text-white mb-6 fade-up">The Numbers<br>Don't <span class="text-uganda-gold">Lie</span></h2>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-16 fade-up">Hard facts that reveal the machinery of power</p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 fade-up">
+        <div class="text-center">
+          <div class="text-6xl md:text-7xl font-bold text-uganda-red mb-2">18K</div>
+          <div class="text-uganda-red text-sm uppercase tracking-wider mb-1">Ghost Soldiers</div>
+          <div class="text-gray-500 text-xs">on military payroll</div>
+        </div>
+        
+        <div class="text-center">
+          <div class="text-6xl md:text-7xl font-bold text-uganda-gold mb-2">$4.5K</div>
+          <div class="text-uganda-gold text-sm uppercase tracking-wider mb-1">Per MP Bribe</div>
+          <div class="text-gray-500 text-xs">to remove term limits</div>
+        </div>
+        
+        <div class="text-center">
+          <div class="text-6xl md:text-7xl font-bold text-blue-400 mb-2">$970M</div>
+          <div class="text-blue-400 text-sm uppercase tracking-wider mb-1">US Aid Yearly</div>
+          <div class="text-gray-500 text-xs">despite human rights abuses</div>
+        </div>
+        
+        <div class="text-center">
+          <div class="text-6xl md:text-7xl font-bold text-green-400 mb-2">3K+</div>
+          <div class="text-green-400 text-sm uppercase tracking-wider mb-1">Arrested</div>
+          <div class="text-gray-500 text-xs">opposition supporters 2021</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-uganda-red/10 rounded-full blur-3xl"></div>
+      <div class="absolute top-0 right-0 w-72 h-72 bg-uganda-gold/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="w-full max-w-6xl mx-auto px-6 relative z-10">
+      <p class="text-uganda-gold uppercase tracking-[0.3em] text-sm text-center mb-2 fade-up">The Journey</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-center text-white mb-12 fade-up">41 Years of Rule</h2>
+      
+      <div class="relative">
+        <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-uganda-gold via-uganda-red to-green-500 rounded-full"></div>
+        
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="relative fade-up">
+            <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-uganda-gold rounded-full border-4 border-uganda-black shadow-lg shadow-uganda-gold/50 z-10"></div>
+            <div class="bg-uganda-card border border-uganda-gold/30 p-5 rounded-xl md:mt-16">
+              <span class="text-uganda-gold font-bold text-2xl">1986</span>
+              <h3 class="font-bold text-lg text-white mt-1">Seized Power</h3>
+              <p class="text-gray-400 text-sm mt-2">NRA captures Kampala. Museveni becomes president.</p>
+            </div>
+          </div>
+          
+          <div class="relative fade-up">
+            <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-uganda-red rounded-full border-4 border-uganda-black shadow-lg shadow-uganda-red/50 z-10"></div>
+            <div class="bg-uganda-card border border-uganda-red/30 p-5 rounded-xl md:mb-16">
+              <span class="text-uganda-red font-bold text-2xl">2005</span>
+              <h3 class="font-bold text-lg text-white mt-1">Term Limits Gone</h3>
+              <p class="text-gray-400 text-sm mt-2">MPs paid $4,500 each to remove constitutional limits.</p>
+            </div>
+          </div>
+          
+          <div class="relative fade-up">
+            <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full border-4 border-uganda-black shadow-lg shadow-blue-500/50 z-10"></div>
+            <div class="bg-uganda-card border border-blue-500/30 p-5 rounded-xl md:mt-16">
+              <span class="text-blue-400 font-bold text-2xl">2007</span>
+              <h3 class="font-bold text-lg text-white mt-1">AMISOM Deploy</h3>
+              <p class="text-gray-400 text-sm mt-2">Somalia mission secures Western tolerance and aid.</p>
+            </div>
+          </div>
+          
+          <div class="relative fade-up">
+            <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-green-500 rounded-full border-4 border-uganda-black shadow-lg shadow-green-500/50 z-10"></div>
+            <div class="bg-uganda-card border border-green-500/30 p-5 rounded-xl md:mb-16">
+              <span class="text-green-400 font-bold text-2xl">2021</span>
+              <h3 class="font-bold text-lg text-white mt-1">Crackdown</h3>
+              <p class="text-gray-400 text-sm mt-2">3,000+ arrested. Internet cut. Bobi Wine besieged.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- MILITARY -->
+  <section id="military" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-1/2 right-0 w-96 h-96 bg-uganda-red/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <div class="flex items-center gap-4 mb-8 fade-up">
+        <div class="w-16 h-16 bg-uganda-red/20 border border-uganda-red/30 rounded-2xl flex items-center justify-center text-4xl">🎖️</div>
+        <div>
+          <p class="text-uganda-red uppercase tracking-[0.2em] text-sm">Pillar of Power</p>
+          <h2 class="font-serif text-4xl text-white">Military Control</h2>
+        </div>
+      </div>
+      
+      <div class="space-y-8">
+        <p class="text-xl text-gray-300 fade-up" data-ref="https://www.updf.go.ug/who-we-are/leadership/|26">
+          President Museveni serves as <span class="text-white font-semibold">Commander in Chief</span> of the UPDF, with his son Gen Muhoozi Kainerugaba appointed as Chief of Defence Forces.
+        </p>
+        
+        <div class="bg-uganda-card border-l-4 border-uganda-red p-8 rounded-r-xl fade-up">
+          <p class="text-2xl text-gray-200 italic" data-ref="https://en.wikipedia.org/wiki/Uganda_People%27s_Defence_Force|25">
+            "The army payroll included at least <span class="text-uganda-red font-bold">18,000 'ghost soldiers'</span> between 1990 and 2002, enabling patronage and financial diversion."
+          </p>
+        </div>
+        
+        <p class="text-lg text-gray-400 fade-up" data-ref="https://www.tandfonline.com/doi/full/10.1080/19392206.2021.1873507|22">
+          Post-9/11, Museveni aligned Uganda with the US War on Terror, deploying UPDF to Somalia, DRC, and CAR—reinforcing domestic legitimacy while securing Western tolerance for his regime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CORRUPTION -->
+  <section id="corruption" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-uganda-gold/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <div class="flex items-center gap-4 mb-8 fade-up">
+        <div class="w-16 h-16 bg-uganda-gold/20 border border-uganda-gold/30 rounded-2xl flex items-center justify-center text-4xl">💰</div>
+        <div>
+          <p class="text-uganda-gold uppercase tracking-[0.2em] text-sm">The System</p>
+          <h2 class="font-serif text-4xl text-white">Corruption as Control</h2>
+        </div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-10 fade-up">
+        <div class="bg-uganda-card border border-gray-800 p-8 rounded-2xl text-center">
+          <div class="text-6xl font-bold text-uganda-gold">20%</div>
+          <p class="text-gray-400 mt-3" data-ref="https://ballardbrief.byu.edu/issue-briefs/corruption-in-uganda|1">of government expenditure lost to corruption</p>
+        </div>
+        <div class="bg-uganda-card border border-gray-800 p-8 rounded-2xl text-center">
+          <div class="text-6xl font-bold text-uganda-gold">$11.5M</div>
+          <p class="text-gray-400 mt-3" data-ref="https://ballardbrief.byu.edu/issue-briefs/corruption-in-uganda|1">paid to secure term limit removal</p>
+        </div>
+      </div>
+      
+      <div class="bg-uganda-card border-l-4 border-uganda-gold p-8 rounded-r-xl mb-10 fade-up">
+        <p class="text-xl text-gray-200" data-ref="https://www.hrw.org/report/2013/10/21/letting-big-fish-swim/failures-prosecute-high-level-corruption-uganda|3">
+          Only <span class="text-uganda-gold font-bold">one minister</span> has ever been convicted of corruption—a verdict overturned after the president publicly offered to pay the defendant's legal costs.
+        </p>
+      </div>
+      
+      <div class="bg-uganda-dark border border-uganda-gold/30 p-8 rounded-2xl fade-up">
+        <p class="text-uganda-gold font-semibold mb-6 text-lg">🔍 The Nepotism Network</p>
+        <div class="grid md:grid-cols-2 gap-4" data-ref="https://ballardbrief.byu.edu/issue-briefs/corruption-in-uganda|1">
+          <div class="flex items-center gap-3 text-gray-300">
+            <span class="w-2 h-2 bg-uganda-gold rounded-full"></span>
+            <span><strong class="text-white">Wife:</strong> Minister of Education and Sports</span>
+          </div>
+          <div class="flex items-center gap-3 text-gray-300">
+            <span class="w-2 h-2 bg-uganda-gold rounded-full"></span>
+            <span><strong class="text-white">Brother:</strong> Senior Advisor</span>
+          </div>
+          <div class="flex items-center gap-3 text-gray-300">
+            <span class="w-2 h-2 bg-uganda-gold rounded-full"></span>
+            <span><strong class="text-white">Son:</strong> Chief of Defence Forces</span>
+          </div>
+          <div class="flex items-center gap-3 text-gray-300">
+            <span class="w-2 h-2 bg-uganda-gold rounded-full"></span>
+            <span><strong class="text-white">Daughter:</strong> Presidential Secretary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- INTERNATIONAL -->
+  <section id="international" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <div class="flex items-center gap-4 mb-8 fade-up">
+        <div class="w-16 h-16 bg-blue-500/20 border border-blue-500/30 rounded-2xl flex items-center justify-center text-4xl">🌍</div>
+        <div>
+          <p class="text-blue-400 uppercase tracking-[0.2em] text-sm">External Support</p>
+          <h2 class="font-serif text-4xl text-white">International Backing</h2>
+        </div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="bg-uganda-card border border-blue-500/30 p-8 rounded-2xl fade-up" style="box-shadow: 0 0 40px rgba(59,130,246,0.1);">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-4xl">🇺🇸</span>
+            <span class="font-bold text-2xl text-white">United States</span>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3" data-ref="https://2021-2025.state.gov/countries-areas/uganda/|5">
+              <span class="text-gray-400">Annual Assistance</span>
+              <span class="font-bold text-xl text-blue-400">$970M+</span>
+            </div>
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3" data-ref="https://responsiblestatecraft.org/2021/07/26/time-to-cut-ugandas-museveni-loose-from-military-aid/|8">
+              <span class="text-gray-400">Military Aid</span>
+              <span class="font-bold text-xl text-blue-400">$170M/yr</span>
+            </div>
+            <div class="flex justify-between items-center" data-ref="https://www.africasacountry.com/2017/12/the-united-states-uganda-and-the-war-on-terror|10">
+              <span class="text-gray-400">Total Since 1986</span>
+              <span class="font-bold text-xl text-blue-400">$20B+</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-uganda-card border border-uganda-red/30 p-8 rounded-2xl fade-up" style="box-shadow: 0 0 40px rgba(220,38,38,0.1);">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-4xl">🇨🇳</span>
+            <span class="font-bold text-2xl text-white">China</span>
+          </div>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3" data-ref="https://www.academia.edu/36826092/A_Critical_Analysis_of_Chinas_Infrastructure_Assistance_To_Uganda|15">
+              <span class="text-gray-400">FDI Share</span>
+              <span class="font-bold text-xl text-uganda-red">27.6%</span>
+            </div>
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+              <span class="text-gray-400">Railway Loan</span>
+              <span class="font-bold text-xl text-uganda-red">$2.8B</span>
+            </div>
+            <div class="flex justify-between items-center" data-ref="https://freedomhouse.org/country/uganda/freedom-net/2020|18">
+              <span class="text-gray-400">Huawei Surveillance</span>
+              <span class="font-bold text-xl text-uganda-red">Active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-uganda-card border-l-4 border-blue-500 p-8 rounded-r-xl fade-up">
+        <p class="text-xl text-gray-200 italic">
+          "Despite documented human rights abuses, international support provides crucial <span class="text-blue-400 font-semibold">legitimacy and resources</span> that sustain the regime."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- OPPOSITION -->
+  <section id="opposition" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-1/2 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-72 h-72 bg-uganda-red/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="w-full max-w-6xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-10 fade-up">
+        <p class="text-green-400 uppercase tracking-[0.3em] text-sm mb-2">Silencing Dissent</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-white">Opposition Suppression</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-uganda-card border border-uganda-red/50 p-6 rounded-2xl fade-up" style="box-shadow: 0 0 40px rgba(220,38,38,0.15);">
+          <p class="text-uganda-red font-bold mb-4">⚠️ 2020-2021 Election Period</p>
+          <div class="grid grid-cols-3 gap-4 text-center">
+            <div data-ref="https://www.irb-cisr.gc.ca/en/country-information/rir/Pages/index.aspx?doc=458858&pls=1&wbdisable=true|6">
+              <div class="text-3xl font-bold text-white">~3,000</div>
+              <div class="text-gray-400 text-sm">Arrested</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-white">243+</div>
+              <div class="text-gray-400 text-sm">Disappeared</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-white">11 Days</div>
+              <div class="text-gray-400 text-sm">Bobi Wine Siege</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-uganda-card border border-gray-800 p-6 rounded-2xl fade-up">
+          <p class="text-white font-semibold mb-4">🔇 Media & Surveillance</p>
+          <div class="space-y-3 text-sm" data-ref="https://freedomhouse.org/country/uganda/freedom-net/2020|18">
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="text-uganda-red">●</span>
+              <span><strong class="text-white">Social media tax:</strong> 200 shillings/day</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="text-uganda-red">●</span>
+              <span><strong class="text-white">Facebook blocked</strong> since 2021</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="text-uganda-red">●</span>
+              <span><strong class="text-white">Huawei surveillance</strong> on opposition</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <p class="text-lg text-gray-400 text-center mt-8 max-w-2xl mx-auto fade-up" data-ref="https://www.irb-cisr.gc.ca/en/country-information/rir/Pages/index.aspx?doc=458858&pls=1&wbdisable=true|6">
+        Military surrounded Bobi Wine's home for <span class="text-white font-semibold">11 days</span> with hundreds of troops, vehicles, and helicopters.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CONCLUSION -->
+  <section id="conclusion" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-uganda-gold/10 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+      <p class="text-uganda-gold uppercase tracking-[0.3em] text-sm mb-4 fade-up">The Conclusion</p>
+      <h2 class="font-serif text-4xl md:text-6xl text-white mb-12 fade-up">The Web of Power</h2>
+      
+      <div class="grid md:grid-cols-4 gap-6 mb-16">
+        <div class="bg-uganda-card border border-gray-800 p-6 rounded-2xl fade-up">
+          <div class="text-4xl mb-4">🎖️</div>
+          <p class="font-semibold text-white">Military Loyalty</p>
+          <p class="text-gray-500 text-sm mt-2">Personal control of armed forces</p>
+        </div>
+        <div class="bg-uganda-card border border-gray-800 p-6 rounded-2xl fade-up">
+          <div class="text-4xl mb-4">💰</div>
+          <p class="font-semibold text-white">Systematic Corruption</p>
+          <p class="text-gray-500 text-sm mt-2">20% of budget as control tool</p>
+        </div>
+        <div class="bg-uganda-card border border-gray-800 p-6 rounded-2xl fade-up">
+          <div class="text-4xl mb-4">🌍</div>
+          <p class="font-semibold text-white">International Backing</p>
+          <p class="text-gray-500 text-sm mt-2">$20B+ in US support since 1986</p>
+        </div>
+        <div class="bg-uganda-card border border-gray-800 p-6 rounded-2xl fade-up">
+          <div class="text-4xl mb-4">🔇</div>
+          <p class="font-semibold text-white">Opposition Silenced</p>
+          <p class="text-gray-500 text-sm mt-2">3,000+ arrested, media controlled</p>
+        </div>
+      </div>
+      
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto fade-up" data-ref="https://www.irb-cisr.gc.ca/en/country-information/rir/Pages/index.aspx?doc=458858&pls=1&wbdisable=true|6">
+        After <span class="text-uganda-gold font-bold">41 years</span>, Museveni's regime demonstrates a comprehensive approach to eliminating political challenges while maintaining a facade of democratic processes.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-800 py-12">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-gray-500 text-sm">Research compiled from Human Rights Watch, Freedom House, US State Department, and academic publications.</p>
+      <p class="text-gray-600 text-xs mt-4">Click citation numbers to view original sources.</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollTo(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+    
+    window.addEventListener('scroll', () => {
+      const progress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    
+    document.querySelectorAll('[data-target]').forEach(counter => {
+      const target = parseInt(counter.dataset.target);
+      const counterObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          let start = performance.now();
+          function update(now) {
+            const progress = Math.min((now - start) / 2000, 1);
+            counter.textContent = Math.floor(progress * target);
+            if (progress < 1) requestAnimationFrame(update);
+          }
+          requestAnimationFrame(update);
+          counterObserver.disconnect();
+        }
+      });
+      counterObserver.observe(counter);
+    });
+    
+    document.querySelectorAll('[data-ref]').forEach(el => {
+      const [url, num] = (el.dataset.ref || '').split('|');
+      if (!url || !num) return;
+      const sup = document.createElement('sup');
+      sup.textContent = num;
+      sup.className = 'ml-1 px-1.5 py-0.5 bg-uganda-gold text-uganda-black text-xs rounded-full cursor-pointer hover:bg-white transition-colors font-bold';
+      sup.onclick = (e) => { e.stopPropagation(); window.open(url, '_blank'); };
+      el.appendChild(sup);
+    });
+    
+    setTimeout(() => document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible')), 100);
+    
+    // Auto-play functionality
+    const sections = ['hero', 'stats', 'timeline', 'military', 'corruption', 'international', 'opposition', 'conclusion'];
+    const sectionNames = ['Introduction', 'Key Statistics', 'Timeline', 'Military Control', 'Corruption', 'International Aid', 'Opposition', 'Conclusion'];
+    let currentSection = 0;
+    let isPlaying = false;
+    let autoPlayInterval = null;
+    let sectionDuration = 8000;
+    
+    const podcastAudio = document.getElementById('podcast-audio');
+    
+    podcastAudio.addEventListener('loadedmetadata', () => {
+      const audioDuration = podcastAudio.duration * 1000;
+      sectionDuration = audioDuration / sections.length;
+      console.log('Audio duration:', podcastAudio.duration, 's | Section duration:', sectionDuration / 1000, 's');
+    });
+    
+    podcastAudio.addEventListener('ended', () => {
+      if (isPlaying) {
+        isPlaying = false;
+        clearInterval(autoPlayInterval);
+        document.getElementById('play-btn').classList.remove('playing');
+        document.getElementById('play-icon').classList.remove('hidden');
+        document.getElementById('pause-icon').classList.add('hidden');
+        document.getElementById('section-label').textContent = '✓ Finished';
+      }
+    });
+    
+    function updateSectionIndicator() {
+      document.getElementById('section-label').textContent = isPlaying ? sectionNames[currentSection] : 'Press ▶ to begin';
+    }
+    
+    function toggleAutoPlay() {
+      isPlaying = !isPlaying;
+      const playBtn = document.getElementById('play-btn');
+      const playIcon = document.getElementById('play-icon');
+      const pauseIcon = document.getElementById('pause-icon');
+      
+      playBtn.classList.toggle('playing', isPlaying);
+      playIcon.classList.toggle('hidden', isPlaying);
+      pauseIcon.classList.toggle('hidden', !isPlaying);
+      
+      if (isPlaying) {
+        podcastAudio.play();
+        scrollTo(sections[currentSection]);
+        updateSectionIndicator();
+        autoPlayInterval = setInterval(() => {
+          currentSection = (currentSection + 1) % sections.length;
+          scrollTo(sections[currentSection]);
+          updateSectionIndicator();
+        }, sectionDuration);
+      } else {
+        podcastAudio.pause();
+        clearInterval(autoPlayInterval);
+        document.getElementById('section-label').textContent = '⏸ ' + sectionNames[currentSection];
+      }
+    }
+    
+    function skipSection(direction) {
+      currentSection = (currentSection + direction + sections.length) % sections.length;
+      scrollTo(sections[currentSection]);
+      updateSectionIndicator();
+      if (isPlaying) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => {
+          currentSection = (currentSection + 1) % sections.length;
+          scrollTo(sections[currentSection]);
+          updateSectionIndicator();
+        }, sectionDuration);
+      }
+    }
+  </script>
+</body>
+</html>
